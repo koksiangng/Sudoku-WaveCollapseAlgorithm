@@ -1,3 +1,4 @@
+from setuptools import SetuptoolsDeprecationWarning
 from sudoku import *
 
 s = Sudoku()
@@ -25,19 +26,23 @@ def mark(x, y, n, sudoku=s.grid):
                 sudoku[j][i].remove(n)
 
 def check(sudoku=s.grid):
+    #[[[v]]]
+    r = []
     c = []
     unique = True
     #Check row
     for i in range(9):
-        if len(sudoku[i] > len(set(sudoku[i]))):
+        for j in sudoku[i]:
+            if j not in r:
+                r.append(j)
+        if len(r) != 9:
             unique = False
+        print(r)
+        r.clear()
+
     #Check column
-    for i in range(9):
-        for j in range(9):
-            c.append(sudoku[i][j])
-        if len(c) > len(set(c)):
-            unique = False
-        c.clear()
+
+
 
     #for i in range(9):
 
